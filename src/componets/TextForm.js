@@ -44,17 +44,17 @@ export default function TextForm(props){
             <h1>{props.heading}</h1>
             <div className="mb-3">
             {/* <label htmlfor="myBox" class="form-label">Example textarea</label> */}
-            <textarea className="form-control my-2" value={text} onChange={handleChange} style={{backgroundColor: props.mode === 'dark'?'grey':'white', color: props.mode === 'dark'?'white':'black'}}  id="myBox" rows="8"></textarea>
-            <button className="btn-primary mx-2" onClick={handlerUpClick}>Convert to UpperCase</button>
-            <button className="btn-primary mx-2" onClick={handlerLoClick}>Convert to LowerCase</button>
-            <button className="btn-primary mx-2" onClick={handleCopy}>Copy Text</button>
-            <button className="btn-primary mx-2" onClick={handleSpaces}>Remove Spaces</button>
+            <textarea className="form-control my-2 my-1" value={text} onChange={handleChange} style={{backgroundColor: props.mode === 'dark'?'grey':'white', color: props.mode === 'dark'?'white':'black'}}  id="myBox" rows="8"></textarea>
+            <button disabled={text.length===0}  className="btn-primary mx-2 my-1" onClick={handlerUpClick}>Convert to UpperCase</button>
+            <button disabled={text.length===0} className="btn-primary mx-2 my-1" onClick={handlerLoClick}>Convert to LowerCase</button>
+            <button disabled={text.length===0} className="btn-primary mx-2 my-1" onClick={handleCopy}>Copy Text</button>
+            <button disabled={text.length===0} className="btn-primary mx-2 my-1" onClick={handleSpaces}>Remove Spaces</button>
             </div>
         </div>
         <div className='container' style={{color: props.mode === 'dark'?'white':'black'}} >
             <h2>Your text summary</h2>
-            <p>{text.split(" ").length} words and {text.length} characters</p>
-            <p>{0.008 * text.split(" ").length} minutes to read</p>
+            <p>{text.split(/\s+/).filter((element)=>{return element.length!==0}).length} words and {text.length} characters</p>
+            <p>{0.008 * text.split(" ").filter((element)=>{return element.length!==0}).length} minutes to read</p>
             <h2>Preview</h2>
             <p>{text.length>0?text:"write something here to preview"}</p>
         </div>
